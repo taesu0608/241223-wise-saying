@@ -12,23 +12,28 @@ public class Main {
 class App {
     public void run() {
 
-        Scanner s = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int lastNo = 0;
-        String content = "";
-        String author = "";
+        String[] contentList = new String[3];
+        String[] authorList = new String[3];
+
+        WiseSaying wiseSaying = new WiseSaying();
 
         while (true) {
             System.out.print("명령) ");
-            String command = s.nextLine();
-            if(command.equals("종료")) {
+            String command = scanner.nextLine();
+            if (command.equals("종료")) {
                 System.out.print("명언 앱을 종료합니다.");
                 break;
-            } else if (command.equals("등록")){
+            } else if (command.equals("등록")) {
                 System.out.print("명언 : ");
-                content = s.nextLine();
+                String content = scanner.nextLine();
 
                 System.out.print("작가 : ");
-                author = s.nextLine();
+                String author = scanner.nextLine();
+                wiseSaying.id = ++lastNo;
+                wiseSaying.content = content;
+                wiseSaying.author = author;
 
 
                 /*formatted
@@ -37,12 +42,21 @@ class App {
                 - 서식문자 순서대로 arr1, arr2, arr3에 대응됨
 
                 */
-                System.out.println("%d번 명령이 등록되었습니다.".formatted(++lastNo));
-            }  else if(command.equals("목록")) {
+                System.out.println("%d번 명언이 등록되었습니다.".formatted(lastNo));
+            } else if (command.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
-                System.out.println("%d / %s / %s".formatted(lastNo, author, content));
+                System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+//                for(int i = 2; i >= 0; i--) {
+//                    System.out.println("%d / %s / %s".formatted(i, authorList[i], authorList[i]));
+//                }
             }
         }
     }
+}
+
+class WiseSaying {
+    int id;
+    String content;
+    String author;
 }
