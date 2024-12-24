@@ -1,3 +1,4 @@
 rootProject.name = 'wise-saying'
-
+include 'src:main:org.example.Main'
+findProject(':src:main:org.example.Main')?.name = 'org.example.Main'
 
