@@ -11,19 +11,15 @@ public class Main {
 
 class App {
 
+    // 클래스에서 함수들이 공유해야 하는 변수 -> 인스턴스 변수
+    private int lastId = 0;
+    private int wiseSayingSize = 0;
+    private WiseSaying[] wiseSayingList = new WiseSaying[3];
+
     public void run() {
 
         Scanner scanner = new Scanner(System.in);
-        int lastId = 0;
-        int wiseSayingSize = 0;
-        WiseSaying[] wiseSayingList = new WiseSaying[3];
-
-        WiseSaying wiseSayingTest = new WiseSaying();
-        wiseSayingTest.author = "홍길동";
-        wiseSayingTest.content = "이것이 명언이다.";
-        wiseSayingTest.id = ++lastId;
-
-        wiseSayingList[wiseSayingSize++] = wiseSayingTest;
+        add("꿈을 지녀라. 그러면 어려운 현실을 이길 수 있다.", "월트 디즈니");
 
         System.out.println("== 명언 앱 ==");
         while(true) {
@@ -42,13 +38,7 @@ class App {
                 System.out.print("작가 : ");
                 String author = scanner.nextLine();
 
-                WiseSaying wiseSaying = new WiseSaying();
-
-                wiseSaying.id = ++lastId;
-                wiseSaying.content = content;
-                wiseSaying.author = author;
-
-                wiseSayingList[wiseSayingSize++] = wiseSaying;
+                add(content, author); // 1. 함수로 분리 -> 코드가 줄어든다. 가독성이 올라간다. 2. 재활용성(중복 제거)
 
                 System.out.println("%d번 명언이 등록되었습니다.".formatted(lastId));
             } else if(command.equals("목록")) {
@@ -58,19 +48,40 @@ class App {
 
                 for(int i = 0; i < wiseSayingSize; i++) {
                     WiseSaying wiseSaying = wiseSayingList[i];
-                    System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
-                }
-
-                for(WiseSaying wiseSaying : wiseSayingList) {
-                    System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+                    System.out.println("%d / %s / %s".formatted(wiseSaying.getId(), wiseSaying.getAuthor(), wiseSaying.getContent()));
                 }
             }
         }
     }
+
+    public void add(String content, String author) {
+        WiseSaying wiseSaying = new WiseSaying(++lastId, content, author);
+        wiseSayingList[wiseSayingSize++] = wiseSaying;
+    }
+
 }
 
 class WiseSaying {
-    int id;
-    String content;
-    String author;
+    private int id;
+    private String content;
+    private String author;
+
+    WiseSaying(int id, String content, String author) {
+        this.id = id;
+        this.content = content;
+        this.author = author;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
 }
