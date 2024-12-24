@@ -18,6 +18,13 @@ class App {
         int wiseSayingSize = 0;
         WiseSaying[] wiseSayingList = new WiseSaying[3];
 
+        WiseSaying wiseSayingTest = new WiseSaying();
+        wiseSayingTest.author = "홍길동";
+        wiseSayingTest.content = "이것이 명언이다.";
+        wiseSayingTest.id = ++lastId;
+
+        wiseSayingList[wiseSayingSize++] = wiseSayingTest;
+
         System.out.println("== 명언 앱 ==");
         while(true) {
             System.out.print("명령) ");
@@ -49,10 +56,10 @@ class App {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
-//                for(int i = 0; i < wiseSayingSize; i++) {
-//                    WiseSaying wiseSaying = wiseSayingList[i];
-//                    System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
-//                }
+                for(int i = 0; i < wiseSayingSize; i++) {
+                    WiseSaying wiseSaying = wiseSayingList[i];
+                    System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
+                }
 
                 for(WiseSaying wiseSaying : wiseSayingList) {
                     System.out.println("%d / %s / %s".formatted(wiseSaying.id, wiseSaying.author, wiseSaying.content));
