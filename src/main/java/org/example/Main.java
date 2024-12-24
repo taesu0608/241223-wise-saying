@@ -13,6 +13,7 @@ class App {
     public void run() {
 
         Scanner s = new Scanner(System.in);
+        int lastNo = 0;
 
         while (true) {
             System.out.print("명령) ");
@@ -23,6 +24,17 @@ class App {
             } else if (command.equals("등록")){
                 System.out.print("명언 : ");
                 s.nextLine();
+
+                System.out.print("작가 : ");
+                s.nextLine();
+
+                /*formatted
+                String 클래스의 기본 메서드로 Cpp의 서식문자 삽입과 같이 동작함
+                String.formmated(arr1,arr2,arr3)
+                - 서식문자 순서대로 arr1, arr2, arr3에 대응됨
+
+                */
+                System.out.println("%d번 명령이 등록되었습니다.".formatted(++lastNo));
             }
         }
     }
